@@ -15,17 +15,59 @@
     <body>
 
        
+        <div class="section-padding">
+            <div class="container">
+
+                
+
+                <!-- // Arrow functions and this Class-8 -->
+
+                <div class="wrap">
+                    <div class="box">
+                        <h2>Wes Bos</h2>
+                        <p class="social">@wesbos</p>
+                    </div>
+                </div>
+
+                <button id="pushy"> Push Me</button>
+
+
+                <!-- // Arrow function Exercises Class-11 -->
+
+                <ul>
+                    <li data-time="5:17">Flexbox Video</li>
+                    <li data-time="8:22">Flexbox Video</li>
+                    <li data-time="3:34">Redux Video</li>
+                    <li data-time="5:23">Flexbox Video</li>
+                    <li data-time="7:12">Flexbox Video</li>
+                    <li data-time="7:24">Redux Video</li>
+                    <li data-time="6:46">Flexbox Video</li>
+                    <li data-time="4:45">Flexbox Video</li>
+                    <li data-time="4:40">Flexbox Video</li>
+                    <li data-time="7:58">Redux Video</li>
+                    <li data-time="11:51">Flexbox Video</li>
+                    <li data-time="9:13">Flexbox Video</li>
+                    <li data-time="5:50">Flexbox Video</li>
+                    <li data-time="5:52">Redux Video</li>
+                    <li data-time="5:49">Flexbox Video</li>
+                    <li data-time="8:57">Flexbox Video</li>
+                    <li data-time="11:29">Flexbox Video</li>
+                    <li data-time="3:07">Flexbox Video</li>
+                    <li data-time="5:59">Redux Video</li>
+                    <li data-time="3:31">Flexbox Video</li>
+                </ul>
+
+                
+                <!-- // Tagged Templates Exercises Class-15 -->
+                <div class='bio2'>
+                    
+                </div>
 
 
 
-        <div class="wrap">
-            <div class="box">
-                <h2>Wes Bos</h2>
-                <p class="social">@wesbos</p>
             </div>
         </div>
 
-        <button id="pushy"> Push Me</button>
 
         
         <!-- material-scrolltop button -->
@@ -169,8 +211,165 @@
             }
 
 
+            // Arrow function Exercises Class-11
+
+            // Select all the list items on the page and convert to array
+            const items = Array.from(document.querySelectorAll('[data-time]')); // like as attributes
+            console.log(items);
+
+
+            // Filter for only the elements that contain the word 'Flexbox'
+            const filtered = items.filter(item => item.textContent.includes('Flexbox'))
+
+            // map down to a list of time strings
+            .map(item => item.dataset.time)  // data time
+
+            // map to an array of seconds
+            .map(timecode => {
+                const parts = timecode.split(':').map(part => parseFloat(part))
+                return (parts[0] * 60) + parts[1]  
+            })
+
+            // reduce to get total
+            .reduce((runningTotal, second) =>runningTotal + second, 0 )
+
+            console.log(filtered);
+
+
+
+            // Template Strings Class-12
+
+            const name = 'Snickers';
+            const age2 = 2;
+            //const sentence = 'My dog ' + name + 'is ' + age2 * 7 + 'years old.';
+            const sentence = `My dog ${name} is ${age2 * 7} years old.`;
+            console.log(sentence);
             
             
+
+            // Creating HTML fragements with template literals Class-13
+
+            // Example-1
+            // const person2 = {
+            //     name: 'Wes',
+            //     job: 'Web Developer',
+            //     city: 'Hamilton',
+            //     bio: 'Wes is a really cool guy that loves to teach web development!',
+            // };
+
+            // const markup = `
+            //     <div class="person">
+            //     <h2>
+            //         ${person2.name}
+            //         <span class="job">${person2.job}</span>
+            //     </h2>
+            //     <p class="location">${person2.city}</p>
+            //     <p class="bio">${person2.bio}</p>
+            //     </div>
+            // `;
+            // console.log(markup);
+            // document.body.innerHTML = markup;
+
+            //     // Example-2
+            // const dogs = [
+            //     {name :'Snickers', age : 2},
+            //     {name :'Hogu', age : 7},
+            //     {name :'Sunny', age : 1}
+            // ]
+
+            // const markup2 = `
+            // <ul class="dogs">
+            //     ${dogs.map(dog => 
+            //     `<li>
+            //         ${dog.name} is ${dog.age * 7}
+            //     </li>`).join('')}  
+            // </ul>
+            // `;
+
+            // console.log(markup2);    // .join like as remove (,)
+
+            // document.body.innerHTML = markup2;
+
+
+            // Example-3
+            // const song = {
+            //     name :'Dying to live',
+            //     artist :'Tupac',
+            //     features :'Biggie smalls'
+            // }
+
+            // // use as tarnary operator
+            // const markup3 = `
+            // <div class="song">
+            //     <p>
+            //         ${song.name} - ${song.artist}
+            //         ${song.features ? `(Featuring ${song.features})` : ''}  
+            //     </p> 
+            // </div>
+            // `;
+            
+            // document.body.innerHTML = markup3;
+
+
+
+            // Example-4
+
+            // const beer = {
+            //     name: 'Belgian Wit',
+            //     brewery: 'Steam Whistle Brewery',
+            //     keywords: ['pale', 'cloudy', 'spiced', 'crisp']
+            // };
+            // function renderKeywords(keywords) {
+            //     return `
+            //     <ul>
+            //         ${keywords.map(keyword => `<li>${keyword}</li>`).join('')}
+            //     </ul>
+            //     `;
+            // }
+            // const markup4 = `
+            //     <div class="beer">
+            //     <h2>${beer.name}</h2>
+            //     <p class="brewery">${beer.brewery}</p>
+            //     ${renderKeywords(beer.keywords)}
+            //     </div>
+            // `;
+            // document.body.innerHTML = markup4;
+
+
+            // Tagged Templates Exercises Class-15
+
+            const dict = {
+                HTML: 'Hyper Text Markup Language',
+                CSS: 'Cascading Style Sheets',
+                JS: 'JavaScript'
+            };
+
+
+            function addAbreviations(strings, ...values){
+                const abbrevited = values.map(value => {
+                    if (dict[value]) {
+                        return `<abbr title="${dict[value]}">${value}</abbr>`
+                    }
+                    return value;
+                });
+
+                return strings.reduce((sentences, string, i) => {
+                return sentences + string + (abbrevited[i] || '');
+                }, '');
+                
+            }
+
+            const first = 'Wes';
+            const last = 'Bos';
+            const {HTML, CSS, JS} = dict;
+            const sentences = addAbreviations`The Developer name is ${first} ${last} and he love to code ${HTML}, ${CSS} and ${JS}`;
+
+            const bio2 = document.querySelector('.bio2');
+            const p = document.createElement('p');
+
+            p.innerHTML = sentences;
+            bio2.appendChild(p);
+
         </script>
 
     </body>
