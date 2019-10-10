@@ -81,3 +81,25 @@ ul,ol{margin:0;padding:0;list-style-type: none;}
 
 button { font-size: 100px; }
 .on { background: #ffc600; }
+
+
+
+.heading{
+      min-height: 30vh;
+      font-family: sans-serif;
+      background: #ffc600;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+}
+.jump{text-transform: uppercase; font-size: 50px; color:white;}
+.jump span {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.1s;
+  cursor:url('http://csscursor.info/source/santahand.png'), default;
+}
+
+.jump span:hover{color: black; transform:translateY(-20px) scale(2) rotate(10deg); z-index: 1;}
