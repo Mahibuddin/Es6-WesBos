@@ -915,16 +915,144 @@
 
             // Promises  Class-34
 
-            const postsPromise = fetch('http://wesbos.com/wp-json/wp/v2/posts');
+            // const postsPromise = fetch('http://wesbos.com/wp-json/wp/v2/posts');
 
-            postsPromise
-            .then(data => data.json())
-            .then(data => { console.log(data) })
-            .catch((err) => {
+            // postsPromise
+            // .then(data => data.json())
+            // .then(data => { console.log(data) })
+            // .catch((err) => console.log(err));
+
+
+            // Creating Promises  Class-35
+
+            // const er = new Promise((resolve, reject) => {
+            //     setTimeout(() => {
+            //     reject(Error('Err wes isn\'t cool'));
+            //     }, 1000);
+            // });
+
+            // er
+            //     .then(data => {
+            //     console.log(data);
+            //     })
+            //     .catch(err => {
+            //     console.error(err);
+            //     });
+
+
+
+                // Chaining Promises + Flow Control  Class-36
+
+            const newPosts = [
+                { title: 'I love JavaScript', author: 'Wes Bos', id: 1 },
+                { title: 'CSS!', author: 'Chris Coyier', id: 2 },
+                { title: 'Dev tools tricks', author: 'Addy Osmani', id: 3 },
+            ];
+
+            const authors = [
+                { name: 'Wes Bos', twitter: '@wesbos', bio: 'Canadian Developer' },
+                { name: 'Chris Coyier', twitter: '@chriscoyier', bio: 'CSS Tricks and CodePen' },
+                { name: 'Addy Osmani', twitter: '@addyosmani', bio: 'Googler' },
+            ];
+
+
+            function getPostById(id) {
+                // create a new promise
+                return new Promise((resolve, reject) => {
+                // using a settimeout to mimick a databse
+                setTimeout(() => {
+                    // find the post we want
+                    const post = newPosts.find(post => post.id === id);
+                    if(post) {
+                    resolve(post); // send the post back
+                    } else {
+                    reject(Error('No Post Was Found!'));
+                    }
+                }, 200);
+                });
+            }
+
+            function hydrateAuthor(post) {
+                // create a new promise
+                return new Promise((resolve, reject) => {
+                // find the author
+                const authorDetails = authors.find(person => person.name === post.author);
+                if(authorDetails) {
+                    // "hydrate" the post object with the author object
+                    post.author = authorDetails;
+                    resolve(post);
+                } else {
+                    reject(Error('Can not find the author'));
+                }
+                });
+            }
+
+            getPostById(3)
+                .then(post => {
+                return hydrateAuthor(post);
+                })
+                .then(post => {
+                console.log(post);
+                })
+                .catch(err => {
                 console.error(err);
-            });
+                });
 
 
+
+                // Working with Multiple Promises  Class-37
+            
+            // const weather = new Promise((resolve) => {
+            //   setTimeout(() => {
+            //     resolve({ temp: 29, conditions: 'Sunny with Clouds'});
+            //   }, 2000);
+            // });
+
+            // const tweets = new Promise((resolve) => {
+            //   setTimeout(() => {
+            //     resolve(['I like cake', 'BBQ is good too!']);
+            //   }, 500);
+            // });
+
+            // Promise
+            //   .all([weather, tweets])
+            //   .then(responses => {
+            //     const [weatherInfo, tweetInfo] = responses;
+            //     console.log(weatherInfo, tweetInfo)
+            //   });
+
+            // const postsPromise = fetch('http://wesbos.com/wp-json/wp/v2/posts');
+            // const streetCarsPromise = fetch('http://data.ratp.fr/api/datasets/1.0/search/?q=paris');
+
+            // Promise
+            //     .all([postsPromise, streetCarsPromise])
+            //     .then(responses => {
+            //     return Promise.all(responses.map(res => res.json()))
+            //     })
+            //     .then(responses => {
+            //     console.log(responses);
+            //     });
+
+
+
+                // Symbols  Class-38
+
+                const kaly = Symbol('Wes');
+                const orin = Symbol('Wes');
+
+                const classRoom = {
+                    [Symbol('Mark')] : { grade: 50, gender: 'male' },
+                    [Symbol('olivia')]: { grade: 80, gender: 'female' },
+                    [Symbol('olivia')]: { grade: 80, gender: 'female' },
+                };
+
+                for (const orin in classRoom) {
+                    console.log(orin);
+                }
+
+                const syms = Object.getOwnPropertySymbols(classRoom);
+                const allData = syms.map(sym => classRoom[sym]);
+                console.log(allData);
 
         </script>
 
